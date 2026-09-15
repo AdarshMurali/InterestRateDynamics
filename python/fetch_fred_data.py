@@ -45,7 +45,7 @@ if not FRED_API_KEY:
     )
 
 START_DATE = "2024-09-01"
-END_DATE = "2025-09-15"
+END_DATE = "2026-09-15"
 OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "raw" / "fred_raw.csv"
 BASE_URL = "https://api.stlouisfed.org/fred/series/observations"
 

@@ -19,7 +19,7 @@ BLS_RAW_PATH = DATA_DIR / "raw" / "bls_raw.csv"
 OUTPUT_PATH = DATA_DIR / "interest_rates_data.csv"
 
 START_DATE = "2024-09-01"
-END_DATE = "2025-09-15"
+END_DATE = "2026-09-15"
 
 FINAL_COLUMNS = [
     "Fed_Funds_Rate", "SOFR_Rate", "Repo_Rate_Overnight", "Prime_Loan_Rate",
@@ -71,7 +71,7 @@ def validate(df):
         issues.append(f"only {len(df)} rows (expected ~250 business days)")
     range_checks = {
         "Fed_Funds_Rate": (0, 10),
-        "Gold_Spot_Price": (1000, 5000),
+        "Gold_Spot_Price": (1000, 8000),
         "VIX": (5, 100),
         "Unemployment_Rate": (0, 20),
     }

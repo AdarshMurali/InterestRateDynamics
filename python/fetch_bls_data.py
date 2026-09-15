@@ -33,7 +33,7 @@ except ImportError:
     BLS_API_KEY = os.environ.get("BLS_API_KEY")
 
 HISTORY_START_YEAR = 2023  # covers the 12-month lookback needed for YoY calcs
-HISTORY_END_YEAR = 2025
+HISTORY_END_YEAR = 2026
 OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "raw" / "bls_raw.csv"
 BASE_URL = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 
