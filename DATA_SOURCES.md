@@ -53,6 +53,8 @@ Website: https://fred.stlouisfed.org/docs/api/
 | VIX (via other source, but FRED has historical) | VIXCLS | Daily | Daily |
 | Mortgage Rate (30Y) | MORTGAGE30US | Weekly | Weekly |
 | Initial Jobless Claims | ICSA | Weekly | Weekly |
+| Inflation Expectations (10Y Breakeven) | T10YIE | Daily | Daily |
+| S&P 500 Index (via Yahoo Finance, ^GSPC) | *(Yahoo Finance)* | Daily | Daily |
 | Real Yields (calculated) | DGS10 - INFLATION (calculated) | Derived | Daily |
 | Yield Curve Spread (calculated) | DGS10 - DGS2 (calculated) | Derived | Daily |
 

@@ -26,8 +26,8 @@ FINAL_COLUMNS = [
     "Treasury_2Y_Yield", "Treasury_5Y_Yield", "Treasury_10Y_Yield",
     "Mortgage_30Y_Rate", "CPI_Headline_YoY", "CPI_Core_YoY", "Gold_Spot_Price",
     "Dollar_Index", "VIX", "Credit_Spreads_HY_OAS", "Unemployment_Rate",
-    "M2_Money_Supply", "Initial_Jobless_Claims", "Yield_Curve_Spread",
-    "Real_Yield_10Y",
+    "M2_Money_Supply", "Initial_Jobless_Claims", "Inflation_Expectation_10Y",
+    "SP500_Index", "Yield_Curve_Spread", "Real_Yield_10Y",
 ]
 
 

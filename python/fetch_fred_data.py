@@ -21,6 +21,11 @@ no BLS equivalent. This script uses the verified replacements below:
   - Jobless claims  -> ICSA, fetched here instead of via BLS
   - Gold spot price -> fetched from Yahoo Finance (GC=F), since FRED
     discontinued its daily LBMA gold series in 2022.
+
+Also fetches two metrics CHARTS_SPECIFICATION.md assumes exist but the
+original pipeline never pulled:
+  - Inflation_Expectation_10Y -> T10YIE (10-Year Breakeven Inflation Rate)
+  - SP500_Index               -> Yahoo Finance ^GSPC (needed for Dashboard 5.3)
 """
 
 import os
@@ -64,6 +69,7 @@ FRED_SERIES = {
     "Credit_Spreads_HY_OAS": "BAMLH0A0HYM2",
     "M2_Money_Supply": "M2SL",
     "Initial_Jobless_Claims": "ICSA",
+    "Inflation_Expectation_10Y": "T10YIE",
 }
 
 
@@ -87,14 +93,20 @@ def fetch_fred_series(series_id, start_date=START_DATE, end_date=END_DATE):
     return df.set_index("date")["value"]
 
 
-def fetch_gold_price(start_date=START_DATE, end_date=END_DATE):
+YFINANCE_SERIES = {
+    "Gold_Spot_Price": "GC=F",
+    "SP500_Index": "^GSPC",
+}
+
+
+def fetch_yfinance_close(ticker, start_date=START_DATE, end_date=END_DATE):
     end_inclusive = (pd.Timestamp(end_date) + pd.Timedelta(days=1)).strftime("%Y-%m-%d")
-    gold = yf.download(
-        "GC=F", start=start_date, end=end_inclusive, progress=False, auto_adjust=False
+    data = yf.download(
+        ticker, start=start_date, end=end_inclusive, progress=False, auto_adjust=False
     )
-    if gold.empty:
-        raise ValueError("No gold price data returned from Yahoo Finance")
-    close = gold["Close"]
+    if data.empty:
+        raise ValueError(f"No data returned from Yahoo Finance for {ticker}")
+    close = data["Close"]
     if isinstance(close, pd.DataFrame):
         close = close.iloc[:, 0]
     close.index = close.index.tz_localize(None)
@@ -118,14 +130,15 @@ def main():
             series_frames[column] = pd.Series(index=business_days, dtype=float)
         time.sleep(0.5)  # stay well under the 120 req/min FRED rate limit
 
-    print("Fetching Gold_Spot_Price (Yahoo Finance: GC=F)...")
-    try:
-        gold_raw = fetch_gold_price()
-        series_frames["Gold_Spot_Price"] = gold_raw.reindex(business_days, method="ffill").bfill()
-        print(f"  OK - {gold_raw.notna().sum()} observations")
-    except Exception as exc:
-        print(f"  FAILED: {exc}")
-        series_frames["Gold_Spot_Price"] = pd.Series(index=business_days, dtype=float)
+    for column, ticker in YFINANCE_SERIES.items():
+        print(f"Fetching {column} (Yahoo Finance: {ticker})...")
+        try:
+            raw = fetch_yfinance_close(ticker)
+            series_frames[column] = raw.reindex(business_days, method="ffill").bfill()
+            print(f"  OK - {raw.notna().sum()} observations")
+        except Exception as exc:
+            print(f"  FAILED: {exc}")
+            series_frames[column] = pd.Series(index=business_days, dtype=float)
 
     df = pd.DataFrame(series_frames)
     df.index.name = "Date"
@@ -135,6 +148,7 @@ def main():
         "Treasury_2Y_Yield", "Treasury_5Y_Yield", "Treasury_10Y_Yield",
         "Mortgage_30Y_Rate", "Gold_Spot_Price", "Dollar_Index", "VIX",
         "Credit_Spreads_HY_OAS", "M2_Money_Supply", "Initial_Jobless_Claims",
+        "Inflation_Expectation_10Y", "SP500_Index",
     ]
     df = df[ordered_columns]
 
