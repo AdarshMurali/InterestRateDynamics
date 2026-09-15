@@ -1,0 +1,8 @@
+# Copy this file to config.py and fill in your real key.
+# config.py is gitignored -- never commit real API keys.
+
+FRED_API_KEY = "your_fred_api_key_here"
+
+# Optional -- the BLS public API works unregistered at lower rate limits,
+# which is enough for this project's 3 series.
+BLS_API_KEY = "your_bls_api_key_here"
