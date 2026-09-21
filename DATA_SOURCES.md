@@ -1,15 +1,15 @@
 # Data Sources Specification
 
-Complete guide to collecting all 15 financial metrics for the Interest Rate Dynamics Dashboard.
+Complete guide to collecting all 16 financial metrics for the Interest Rate Dynamics Dashboard.
 
 ---
 
 ## Overview
 
-**Total Metrics:** 15  
-**Time Period:** Last 12 months (Sept 2024 - Sept 2025)  
-**Update Frequency:** Monthly (for portfolio project)  
-**Total Data Size:** ~250-300 rows × 18 columns  
+**Total Metrics:** 16 (was 15, now includes international valuation context)  
+**Time Period:** Last 12 months (Sept 2024 - Sept 2025) + annual market cap data (2020-2024)  
+**Update Frequency:** Monthly for US rates; Annual for international market cap ratios  
+**Total Data Size:** ~250-300 rows × 19 columns  
 
 ---
 
@@ -192,7 +192,44 @@ cpi_data = fetch_bls(series_list)
 
 ---
 
-## Data Source 4: World Bank / OECD (Commodities)
+## Data Source 4: CEIC Data / World Bank (Valuation Metrics)
+
+**Source:** CEIC Data (International macroeconomic database)  
+**Cost:** Free (public data)  
+**Coverage:** 15+ countries, 2020-2024
+
+### NEW Metric: Market Capitalization to GDP Ratio
+
+| Metric | Source | Countries | Frequency | Use Case |
+|--------|--------|-----------|-----------|----------|
+| **Market Cap to GDP %** | CEIC Data / World Bank | USA, UK, Canada, Australia, India, China, Japan, Germany, France, Korea, Brazil, Turkey, Greece, Belgium, Portugal | Annual | Macro valuation context |
+
+**Why This Metric:**
+- Shows if equity markets are over/undervalued relative to economic size
+- Provides country-specific valuation perspective (not just global)
+- Complements rate dynamics with forward-looking valuation insights
+- Example: US (165.4%) vs China (50.2%) shows different market development stages
+
+**Data Collected:**
+```
+File: data/raw/market_cap_to_gdp_by_country.csv
+Format: 15 countries × 5 years (2020-2024)
+```
+
+**Sample Insights (2024):**
+- Highest valuations: USA (165.4%), Canada (132.6%), Japan (125.3%)
+- Lowest valuations: Portugal (28.8%), Turkey (30.1%), China (50.2%)
+- Strongest YoY growth: India (+17.6%), UK (+18.8%)
+
+### Collection Method
+
+1. **Primary Source:** CEIC Data platform (https://www.ceicdata.com/)
+2. **Alternative:** World Bank Data (https://data.worldbank.org/)
+3. **Validation:** Cross-reference with IMF World Economic Database
+
+---
+
+## Data Source 5: World Bank / OECD (Commodities)
 
 **Source:** World Bank Commodity Price Data  
 **Cost:** Free  
@@ -320,9 +357,12 @@ VIX                            (Index 0-100)
 Credit_Spreads_HY_OAS          (basis points)
 Unemployment_Rate              (%)
 M2_Money_Supply                (Billions USD)
+Market_Cap_to_GDP_US           (%) - NEW: USA market valuation
 Yield_Curve_Spread             (%) - CALCULATED: 10Y - 2Y
 Real_Yield_10Y                 (%) - CALCULATED: 10Y Nominal - CPI
 ```
+
+**Note:** The global `market_cap_to_gdp_by_country.csv` contains 15 countries for broader international analysis; the main dashboard will focus on US (with optional country comparisons in a separate dashboard)
 
 ### Sample Row
 
@@ -409,11 +449,13 @@ Date,Source,SeriesID,Records,Status,Notes
 
 Before considering data "ready for Tableau":
 
-- [ ] All 15 metrics present
-- [ ] Date range: Sept 2024 - Sept 2025
+- [ ] All 16 metrics present (15 US rates + 1 market cap)
+- [ ] Date range: Sept 2024 - Sept 2025 (daily US metrics)
+- [ ] International market cap data: 2020-2024 (annual, 15 countries)
 - [ ] No null values in critical columns
 - [ ] Values in realistic ranges (no outliers)
-- [ ] 250+ rows (daily ≈ 250 business days)
+- [ ] 250+ rows for daily metrics (≈250 business days)
+- [ ] 15 countries × 5 years for market cap ratio data
 - [ ] CSV headers correct & aligned with Tableau
 - [ ] Calculated metrics validated
 - [ ] Data source attribution documented

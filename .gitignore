@@ -92,5 +92,8 @@ Pipfile.lock
 
 # Keep these tracked:
 !data/README.md
+!data/raw/market_cap_to_gdp_by_country.csv
+!data/raw/market_cap_to_gdp_historical_2016_2026.csv
+!data/raw/top_10_economies_market_cap_to_gdp_2016_2026.csv
 !python/requirements.txt
 !tableau/README.md
