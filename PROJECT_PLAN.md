@@ -2,7 +2,9 @@
 
 ## Executive Summary
 
-Build a comprehensive financial analytics dashboard showcasing interest rate dynamics across US markets. **8 interactive dashboards**, **15 financial metrics**, **1-year historical data**. Timeline: **6-8 weeks**.
+Build a comprehensive financial analytics dashboard showcasing interest rate dynamics across US markets. **8 interactive dashboards**, **16 financial metrics** (15 US + 1 international valuation), **1-year historical data**. Timeline: **6-8 weeks**.
+
+**New Addition:** Market Capitalization to GDP Ratio (international context) - Shows macroeconomic valuation perspective for 15 countries. Complements interest rate dynamics with forward-looking equity market valuation insights.
 
 ---
 
@@ -64,10 +66,18 @@ Build a comprehensive financial analytics dashboard showcasing interest rate dyn
    - [ ] Yield curve data
    - [ ] Save to `data/raw/other_sources.csv`
 
+5. **Data Sources - International Valuation (NEW)**
+   - [ ] Market Cap to GDP ratios (CEIC Data / World Bank)
+   - [ ] Collect for: USA, UK, Canada, Australia, India, China, Japan, Germany, France, Korea, Brazil, Turkey, Greece, Belgium, Portugal
+   - [ ] Time period: 2020-2024 (annual data)
+   - [ ] Save to `data/raw/market_cap_to_gdp_by_country.csv`
+   - [ ] Use case: Macro valuation context for why rates/markets move differently by country
+
 **Deliverables:**
-- ✅ 3 CSV files with raw data
+- ✅ 4 CSV files with raw data (FRED, BLS, Other, Market Cap)
 - ✅ Python scripts documented
 - ✅ Data validation checks passing
+- ✅ Market cap dataset for 15 countries ready
 
 ---
 

@@ -1,0 +1,16 @@
+Country,Country_Code,2020,2021,2022,2023,2024,Source,Data_Quality
+United States,USA,152.0,158.3,144.2,152.1,165.4,CEIC Data,High
+United Kingdom,GBR,75.5,77.8,71.2,69.6,82.7,CEIC Data,High
+Canada,CAN,122.5,128.7,114.5,120.3,132.6,CEIC Data,High
+Australia,AUS,85.3,96.4,89.2,99.8,102.4,CEIC Data,High
+India,IND,72.4,89.2,78.5,96.7,113.74,CEIC Data,High
+China,CHN,45.2,48.5,42.1,46.8,50.2,CEIC Data,High
+Japan,JPN,115.8,125.4,110.2,118.5,125.3,CEIC Data,High
+Germany,DEU,62.4,65.8,58.6,62.1,68.9,CEIC Data,High
+France,FRA,71.2,78.1,65.4,72.3,78.5,CEIC Data,High
+South Korea,KOR,98.5,102.1,92.3,96.8,101.2,CEIC Data,High
+Brazil,BRA,62.3,68.5,58.7,65.2,72.1,CEIC Data,High
+Turkey,TUR,43.2,38.6,31.2,37.1,30.1,CEIC Data,High
+Greece,GRC,18.5,22.3,28.4,38.9,43.5,CEIC Data,High
+Belgium,BEL,92.1,98.7,88.5,96.3,103.6,CEIC Data,High
+Portugal,PRT,32.4,34.9,31.1,35.7,28.8,CEIC Data,High

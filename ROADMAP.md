@@ -1,7 +1,33 @@
 # Future Roadmap & Enhancements
 
-**Status:** Post-MVP Ideas  
+**Status:** Post-MVP Ideas + Recent Enhancements  
 **Purpose:** Track potential improvements and future phases
+
+---
+
+## Recent Additions (Current Cycle)
+
+### Market Capitalization to GDP Ratio (NEW - Sept 2026)
+
+**Added:** International valuation context to complement US rate dynamics  
+**Impact:** Elevates project from US-centric to global macroeconomic perspective
+
+**What's Included:**
+- Market cap to GDP ratios for 15 countries (USA, UK, Canada, Australia, India, China, Japan, Germany, France, Korea, Brazil, Turkey, Greece, Belgium, Portugal)
+- 5 years of annual data (2020-2024)
+- Shows relative valuations: USA (165.4%) vs China (50.2%) vs Portugal (28.8%)
+
+**Why This Matters:**
+- Explains why US markets are more volatile (higher valuations)
+- Shows China's market is still developing (50.2% vs global average ~80%)
+- India rapidly re-valuing (+17.6% YoY) — emerging market story
+- Context for why rate impacts differ by country
+
+**Future Dashboard Opportunity:**
+- Dashboard 9 (Optional): "Global Market Valuations" 
+  - Heatmap: Market cap to GDP by country, 2020-2024
+  - Scatter: Market cap % vs economic growth rate
+  - Story: "Are global markets expensive?"
 
 ---
 
